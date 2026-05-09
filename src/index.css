@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--primary: #3e2723;
+	--secondary: #f5e6cc;
+	--accent: #c97b36;
+	--accent-dark: #a0612a;
+	--highlight: #e6c9a8;
+	--background: #fdf6ec;
+	--surface: #ffffff;
+	--muted: #7d5a4f;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Lato", sans-serif;
+	background-color: var(--background);
+	color: var(--primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Playfair Display", serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--secondary);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--accent);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--accent-dark);
+}
+
+/* Animations */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% 0;
+	}
+	100% {
+		background-position: 200% 0;
+	}
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-shimmer {
+	background: linear-gradient(
+		90deg,
+		var(--secondary) 25%,
+		var(--highlight) 50%,
+		var(--secondary) 75%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s infinite;
+}
+
+/* Card styles */
+.card {
+	@apply bg-white border border-highlight rounded-xl shadow-sm;
+	box-shadow: 0 2px 12px rgba(62, 39, 35, 0.08);
+}
+
+/* Button styles */
+.btn-primary {
+	@apply bg-accent text-white font-semibold px-4 py-2 rounded-lg transition-colors;
+}
+.btn-primary:hover {
+	@apply bg-accent-dark;
+}
+
+.btn-secondary {
+	@apply bg-transparent border-2 border-accent text-accent font-semibold px-4 py-2 rounded-lg transition-colors;
+}
+.btn-secondary:hover {
+	@apply bg-accent text-white;
+}
+
+/* Input styles */
+.input {
+	@apply w-full px-4 py-2 border border-highlight rounded-lg bg-white transition-colors;
+}
+.input:focus {
+	@apply outline-none border-accent ring-2 ring-accent/20;
+}
+
+/* Status badges */
+.badge-waiting {
+	@apply bg-highlight text-primary;
+}
+.badge-inprogress {
+	@apply bg-accent text-white;
+}
+.badge-completed {
+	@apply bg-primary text-secondary;
+}
+.badge-running {
+	@apply bg-green-100 text-green-800;
+}
+.badge-paused {
+	@apply bg-yellow-100 text-yellow-800;
+}
+.badge-stopped {
+	@apply bg-red-100 text-red-800;
+}

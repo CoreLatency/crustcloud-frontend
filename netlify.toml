@@ -1,0 +1,13 @@
+[build]
+  # Using npm for better Netlify compatibility
+  # To use bun instead: command = "npm install -g bun && bun install && bun run build"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
