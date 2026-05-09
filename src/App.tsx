@@ -37,26 +37,37 @@ function ProtectedRoute() {
 }
 
 function AppLayout() {
-	const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-	return (
-		<div className="min-h-screen bg-background">
-			<Sidebar
-				collapsed={sidebarCollapsed}
-				onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
-			/>
-			<div
-				className={`transition-all duration-300 ${
-					sidebarCollapsed ? "md:ml-[70px]" : "md:ml-[220px]"
-				}`}
-			>
-				<Header />
-				<main className="p-4 md:p-6">
-					<Outlet />
-				</main>
-			</div>
-		</div>
-	);
+    return (
+      <div className="min-h-screen bg-background">
+        {/* Mobile overlay */}
+        {mobileMenuOpen && (
+          <div
+            className="fixed inset-0 bg-black/50 z-40 md:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+        <Sidebar
+          collapsed={sidebarCollapsed}
+          onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
+          mobileOpen={mobileMenuOpen}
+          onMobileClose={() => setMobileMenuOpen(false)}
+        />
+        <div
+          className={`transition-all duration-300 ${
+            sidebarCollapsed ? "md:ml-[70px]" : "md:ml-[220px]"
+          }`}>
+          <Header
+            onMobileMenuToggle={() => setMobileMenuOpen(!mobileMenuOpen)}
+          />
+          <main className="p-4 md:p-6">
+            <Outlet />
+          </main>
+        </div>
+      </div>
+    );
 }
 
 function AppRoutes() {
